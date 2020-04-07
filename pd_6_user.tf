@@ -125,7 +125,7 @@ resource "pagerduty_escalation_policy" "OperationsEP" {
 
 ################################################################################################
 # Create PagerDuty Services
-resource "pagerduty_service" "Emergency Response" {
+resource "pagerduty_service" "EmergencyResponse" {
   name                    = "Emergency Response Team"
   auto_resolve_timeout    = 14400
   acknowledgement_timeout = 600
