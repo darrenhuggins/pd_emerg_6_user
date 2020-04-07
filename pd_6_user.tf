@@ -67,8 +67,12 @@ resource "pagerduty_user" "responder6" {
 ################################################################################################
 # Assign the Users to the right Teams: -
 resource "pagerduty_team_membership" "teamOps" {
-  user_id = pagerduty_user.responder1.id
-  user_id = pagerduty_user.responder2.id
+  user_id = ["${pagerduty_user.responder1.id}",
+             "${pagerduty_user.responder2.id}",
+             "${pagerduty_user.responder3.id}",
+             "${pagerduty_user.responder4.id}",
+             "${pagerduty_user.responder5.id}",
+             "${pagerduty_user.responder6.id}"]
   team_id = pagerduty_team.Operations.id
 }
 
