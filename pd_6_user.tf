@@ -39,7 +39,7 @@ resource "pagerduty_user" "responder1" {
 }
 resource "pagerduty_user" "responder2" {
   name  = "responder2"
-  email = "responder3@pagerduty.demo"
+  email = "responder2@pagerduty.demo"
   color = "chocolate"
   role = "limited_user"
 }
