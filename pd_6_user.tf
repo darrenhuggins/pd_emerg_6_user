@@ -1,8 +1,6 @@
 ################################################################################################
-# This configuration requires a PagerDuty API Key and the Destination instance to have Prioties
-# enabled to support event rule creation. Use the API key to generate the Priotiy ID's here:
-# https://api-reference.pagerduty.com/#!/Priorities/get_priorities
-# To Destroy the config run Destroy twice (perhaps a bug in the provider)
+# This configuration requires a PagerDuty API Key added as a Terraform variable pd_token.
+#
 ################################################################################################
 variable "pd_token" {
   type = string
@@ -14,7 +12,7 @@ provider "pagerduty" {
 }
 
 ################################################################################################
-# Create PagerDuty teams - Automation, Operations, Banking Development (DevOps), Management
+# Create PagerDuty team
 resource "pagerduty_team" "Operations" {
   name        = "Emergency Response Team"
   description = "Emergency Team"
@@ -24,7 +22,6 @@ resource "pagerduty_team" "Operations" {
 
 ################################################################################################
 # Create a PagerDuty users
-
 resource "pagerduty_user" "responder1" {
   name  = "responder1"
   email = "responder1@pagerduty.demo"
@@ -35,7 +32,7 @@ resource "pagerduty_user" "responder2" {
   name  = "responder2"
   email = "responder2@pagerduty.demo"
   color = "chocolate"
-  role = "limited_user"
+  role = "user"
 }
 resource "pagerduty_user" "responder3" {
   name  = "responder3"
@@ -94,9 +91,9 @@ resource "pagerduty_schedule" "operations_sch" {
   name      = "Emergency On-call Schedule"
   time_zone = "America/Chicago"
   layer {
-    name                         = "Weekly Rotation"
-    start                        = "2018-11-06T20:00:00-10:00"
-    rotation_virtual_start       = "2018-11-07T06:00:00+00:00"
+    name                         = "Daily Rotation"
+    start                        = "2020-04-01T20:00:00-10:00"
+    rotation_virtual_start       = "2020-04-01T06:00:00+00:00"
     rotation_turn_length_seconds = 86400
     users                        = ["${pagerduty_user.responder1.id}",
                                     "${pagerduty_user.responder2.id}",
@@ -104,11 +101,6 @@ resource "pagerduty_schedule" "operations_sch" {
                                     "${pagerduty_user.responder4.id}",
                                     "${pagerduty_user.responder5.id}",
                                     "${pagerduty_user.responder6.id}"]
-	restriction {
-      type              = "daily_restriction"
-      start_time_of_day = "08:00:00"
-      duration_seconds  = 86400
-	}
   }
 }
 ################################################################################################
