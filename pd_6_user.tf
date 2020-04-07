@@ -109,7 +109,7 @@ resource "pagerduty_schedule" "operations_sch" {
 ################################################################################################
 # Create PagerDuty EP's
 resource "pagerduty_escalation_policy" "OperationsEP" {
-  name      = "WU eCommerce Engineering (EP)"
+  name      = "Operation Escalation"
   num_loops = 2
   teams     = ["${pagerduty_team.Operations.id}"]
 
