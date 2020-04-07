@@ -68,6 +68,7 @@ resource "pagerduty_user" "responder6" {
 # Assign the Users to the right Teams: -
 resource "pagerduty_team_membership" "teamOps" {
   user_id = pagerduty_user.responder1.id
+  user_id = pagerduty_user.responder2.id
   team_id = pagerduty_team.Operations.id
 }
 
@@ -125,7 +126,7 @@ resource "pagerduty_escalation_policy" "OperationsEP" {
 
 ################################################################################################
 # Create PagerDuty Services
-resource "pagerduty_service" "EmergencyResponse" {
+resource "pagerduty_service" "Emergency-Response" {
   name                    = "Emergency Response Team"
   auto_resolve_timeout    = 14400
   acknowledgement_timeout = 600
