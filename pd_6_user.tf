@@ -19,14 +19,8 @@ resource "pagerduty_team" "Operations" {
   name        = "Emergency Response Team"
   description = "Emergency Team"
 }
-resource "pagerduty_team" "Stakeholders" {
-  name        = "Stakeholders"
-  description = "Management Team"
-}
 
 ################################################################################################
-
-
 
 ################################################################################################
 # Create a PagerDuty users
@@ -66,16 +60,30 @@ resource "pagerduty_user" "responder6" {
 
 ################################################################################################
 # Assign the Users to the right Teams: -
-resource "pagerduty_team_membership" "teamOps" {
-  user_id = ["${pagerduty_user.responder1.id}",
-             "${pagerduty_user.responder2.id}",
-             "${pagerduty_user.responder3.id}",
-             "${pagerduty_user.responder4.id}",
-             "${pagerduty_user.responder5.id}",
-             "${pagerduty_user.responder6.id}"]
+resource "pagerduty_team_membership" "responder1" {
+  user_id = pagerduty_user.responder1.id
   team_id = pagerduty_team.Operations.id
 }
-
+resource "pagerduty_team_membership" "responder2" {
+  user_id = pagerduty_user.responder1.id
+  team_id = pagerduty_team.Operations.id
+}
+resource "pagerduty_team_membership" "responder3" {
+  user_id = pagerduty_user.responder3.id
+  team_id = pagerduty_team.Operations.id
+}
+resource "pagerduty_team_membership" "responder4" {
+  user_id = pagerduty_user.responder4.id
+  team_id = pagerduty_team.Operations.id
+}
+resource "pagerduty_team_membership" "responder5" {
+  user_id = pagerduty_user.responder5.id
+  team_id = pagerduty_team.Operations.id
+}
+resource "pagerduty_team_membership" "responder6" {
+  user_id = pagerduty_user.responder6.id
+  team_id = pagerduty_team.Operations.id
+}
 ################################################################################################
 
 
@@ -106,7 +114,6 @@ resource "pagerduty_schedule" "operations_sch" {
 ################################################################################################
 
 
-
 ################################################################################################
 # Create PagerDuty EP's
 resource "pagerduty_escalation_policy" "OperationsEP" {
@@ -125,7 +132,6 @@ resource "pagerduty_escalation_policy" "OperationsEP" {
 }
 
 ################################################################################################
-
 
 
 ################################################################################################
