@@ -68,28 +68,9 @@ resource "pagerduty_user" "responder6" {
 # Assign the Users to the right Teams: -
 resource "pagerduty_team_membership" "teamOps" {
   user_id = pagerduty_user.responder1.id
-  team_id = pagerduty_team.automation.id
+  team_id = pagerduty_team.Operations.id
 }
-resource "pagerduty_team_membership" "teamOps" {
-  user_id = pagerduty_user.responder2.id
-  team_id = pagerduty_team.automation.id
-}
-resource "pagerduty_team_membership" "teamOps" {
-  user_id = pagerduty_user.responder3.id
-  team_id = pagerduty_team.automation.id
-}
-resource "pagerduty_team_membership" "teamOps" {
-  user_id = pagerduty_user.responder4.id
-  team_id = pagerduty_team.automation.id
-}
-resource "pagerduty_team_membership" "teamOps" {
-  user_id = pagerduty_user.responder5.id
-  team_id = pagerduty_team.automation.id
-}
-resource "pagerduty_team_membership" "teamOps" {
-  user_id = pagerduty_user.responder6.id
-  team_id = pagerduty_team.automation.id
-}
+
 ################################################################################################
 
 
