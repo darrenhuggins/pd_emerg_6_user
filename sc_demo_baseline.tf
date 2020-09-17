@@ -103,6 +103,22 @@ resource "pagerduty_schedule" "primary_sch" {
                                     "${pagerduty_user.responder6.id}"]
   }
 }
+resource "pagerduty_schedule" "backup_sch" {
+  name      = "Primary On-call Schedule"
+  time_zone = "America/Chicago"
+  layer {
+    name                         = "Daily Rotation"
+    start                        = "2020-09-01T20:00:00-10:00"
+    rotation_virtual_start       = "2020-09-01T06:00:00+00:00"
+    rotation_turn_length_seconds = 86400
+    users                        = ["${pagerduty_user.responder2.id}",
+                                    "${pagerduty_user.responder3.id}",
+                                    "${pagerduty_user.responder4.id}",
+                                    "${pagerduty_user.responder5.id}",
+                                    "${pagerduty_user.responder6.id}",
+                                    "${pagerduty_user.responder1.id}"]
+  }
+}
 ################################################################################################
 
 
