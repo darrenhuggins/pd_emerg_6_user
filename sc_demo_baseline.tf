@@ -104,7 +104,7 @@ resource "pagerduty_schedule" "primary_sch" {
   }
 }
 resource "pagerduty_schedule" "backup_sch" {
-  name      = "Primary On-call Schedule"
+  name      = "Backup On-call Schedule"
   time_zone = "America/Chicago"
   layer {
     name                         = "Daily Rotation"
