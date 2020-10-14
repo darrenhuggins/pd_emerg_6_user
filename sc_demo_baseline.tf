@@ -52,6 +52,10 @@ resource "pagerduty_user" "responder6" {
   name  = "responder6"
   email = "responder6@pagerduty.demo"
 }
+resource "pagerduty_user" "responder6" {
+  name  = "responder7"
+  email = "responder7@pagerduty.demo"
+}
 ################################################################################################
 
 
